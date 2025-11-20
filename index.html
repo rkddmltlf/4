@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>학교 건물 안내</title>
+  <link rel="stylesheet" href="recommended_style.css">
+</head>
+<body>
+  <header>학교 건물 안내</header>
+  <div class="container">
+    <div class="controls">
+      <button id="prevFloor">◀</button>
+      <select id="floorSelect">
+        <option value="1">1층</option>
+        <option value="2">2층</option>
+        <option value="3">3층</option>
+        <option value="4">4층</option>
+      </select>
+      <button id="nextFloor">▶</button>
+    </div>
+    <img id="floorImage" src="floorplan_1.png" alt="건물 도면" class="floorplan" />
+    <script>
+      const floorImage = document.getElementById('floorImage');
+      const prevBtn = document.getElementById('prevFloor');
+      const nextBtn = document.getElementById('nextFloor');
+      const floorSelect = document.getElementById('floorSelect');
+      let currentFloor = 1;
+      const minFloor = 1;
+      const maxFloor = 4;
+      function updateFloorDisplay() {
+        if (floorSelect) floorSelect.value = String(currentFloor);
+        if (floorImage) floorImage.src = 'floorplan_' + currentFloor + '.png';
+      }
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (currentFloor > minFloor) {
+            currentFloor--;
+            updateFloorDisplay();
+          }
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentFloor < maxFloor) {
+            currentFloor++;
+            updateFloorDisplay();
+          }
+        });
+      }
+      if (floorSelect) {
+        floorSelect.addEventListener('change', () => {
+          const val = parseInt(floorSelect.value, 10);
+          if (!isNaN(val) && val >= minFloor && val <= maxFloor) {
+            currentFloor = val;
+            updateFloorDisplay();
+          }
+        });
+      }
+      updateFloorDisplay();
+    </script>
+    <div class="grid">
+      <div class="info-box" id="printerBox">
+        <h2>📠 프린터기</h2>
+        <p><strong>유무:</strong> 있음</p>
+        <p><strong>위치:</strong> 1층 로비, 2층 복도</p>
+        <p><strong>총 개수:</strong> 3대</p>
+        <small>예시: 1층 로비(2대), 2층 복도(1대)</small>
+      </div>
+      <div class="info-box" id="storeBox">
+        <h2>🏪 편의점</h2>
+        <p><strong>유무:</strong> 있음</p>
+        <p><strong>위치:</strong> 1층 건물 입구 오른쪽</p>
+        <p><strong>총 개수:</strong> 1개</p>
+        <small>영업시간: 08:00 - 22:00 (예시)</small>
+      </div>
+      <div class="info-box" id="vendingBox">
+        <h2>🥤 자판기</h2>
+        <p><strong>유무:</strong> 있음</p>
+        <p><strong>위치:</strong> 2층 계단 옆, 3층 휴게공간</p>
+        <p><strong>총 개수:</strong> 2개</p>
+        <small>음료 / 스낵 구비 (예시)</small>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
