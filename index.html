@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>학교 건물 안내</title>
+  <title>4호관 정보</title>
   <style>
     :root{--bg:#f5f5f5;--card:#ffffff;--accent:#1e3a8a}
     *{box-sizing:border-box}
@@ -37,27 +37,22 @@
   </style>
 </head>
 <body>
-  <header>학교 건물 안내</header>
+  <header>4호관 (2층)</header>
 
   <div class="container">
-    <!-- 가운데 층 컨트롤러 (이곳에 리스트: select가 중앙에 위치) -->
     <div class="controls">
       <button id="prevFloor">◀</button>
       <select id="floorSelect">
         <option value="1">1층</option>
         <option value="2">2층</option>
-        <option value="3">3층</option>
-        <option value="4">4층</option>
       </select>
       <button id="nextFloor">▶</button>
     </div>
 
-    <!-- 도면 이미지 (floorplan_1.png ~ floorplan_4.png 예상) -->
-    
-<img id="floorImage" src="floorplan_1.png" alt="건물 도면" class="floorplan" />
+    <img id="floorImage" src="floorplan_1.png" alt="건물 도면" class="floorplan" />
 
     <script>
-      // 안전하게 요소를 가져오고 없으면 실패하지 않도록 방어 코드 사용
+      // 요소 가져오기
       const floorImage = document.getElementById('floorImage');
       const prevBtn = document.getElementById('prevFloor');
       const nextBtn = document.getElementById('nextFloor');
@@ -65,15 +60,15 @@
 
       let currentFloor = 1;
       const minFloor = 1;
-      const maxFloor = 4;
+      const maxFloor = 2; // [수정됨] 최대 층수를 4에서 2로 변경
 
       function updateFloorDisplay() {
-        // 변경될 때마다 select 값과 이미지가 동기화되도록
+        // 선택된 값과 이미지 동기화
         if (floorSelect) floorSelect.value = String(currentFloor);
         if (floorImage) floorImage.src = 'floorplan_' + currentFloor + '.png';
       }
 
-      // 버튼에 이벤트 등록 (존재 확인 후)
+      // 버튼 이벤트 리스너
       if (prevBtn) {
         prevBtn.addEventListener('click', () => {
           if (currentFloor > minFloor) {
@@ -102,34 +97,30 @@
         });
       }
 
-      // 초기화
+      // 초기 실행
       updateFloorDisplay();
     </script>
 
-    <!-- 기존 정보 박스들 -->
     <div class="grid">
       <div class="info-box" id="printerBox">
-        <h2>📠 프린터기</h2>
+        <h2>프린터기</h2>
         <p><strong>유무:</strong> 있음</p>
-        <p><strong>위치:</strong> 1층 로비, 2층 복도</p>
-        <p><strong>총 개수:</strong> 3대</p>
-        <small>예시: 1층 로비(2대), 2층 복도(1대)</small>
+        <p><strong>위치:</strong> 2층 복도</p>
+        <p><strong>총 개수:</strong> 1대</p>
+        <small>2층 복도(1대)</small>
       </div>
 
       <div class="info-box" id="storeBox">
-        <h2>🏪 편의점</h2>
+        <h2>정수기</h2>
         <p><strong>유무:</strong> 있음</p>
-        <p><strong>위치:</strong> 1층 건물 입구 오른쪽</p>
+        <p><strong>위치:</strong> 2층 복도</p>
         <p><strong>총 개수:</strong> 1개</p>
-        <small>영업시간: 08:00 - 22:00 (예시)</small>
+        <small></small>
       </div>
 
       <div class="info-box" id="vendingBox">
-        <h2>🥤 자판기</h2>
-        <p><strong>유무:</strong> 있음</p>
-        <p><strong>위치:</strong> 2층 계단 옆, 3층 휴게공간</p>
-        <p><strong>총 개수:</strong> 2개</p>
-        <small>음료 / 스낵 구비 (예시)</small>
+        <h2>자판기</h2>
+        <p><strong>유무:</strong> 없음</p>
       </div>
     </div>
   </div>
